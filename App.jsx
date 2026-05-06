@@ -16,16 +16,37 @@ export default function SyczokPrototype() {
   const vehiculo = useMemo(() => VEHICULOS[0], []);
 
   return (
-    <div style={{ background: "black", minHeight: "100vh", color: "white", padding: "20px", fontFamily: "Arial" }}>
+    <div
+      style={{
+        background: "black",
+        minHeight: "100vh",
+        color: "white",
+        padding: "20px",
+        fontFamily: "Arial",
+      }}
+    >
       <div style={{ maxWidth: "400px", margin: "0 auto" }}>
-        
-        <div style={{ background: "#18181b", borderRadius: "20px", padding: "20px", marginBottom: "20px", textAlign: "center" }}>
+        <div
+          style={{
+            background: "#18181b",
+            borderRadius: "20px",
+            padding: "20px",
+            marginBottom: "20px",
+            textAlign: "center",
+          }}
+        >
           <h1>SYCZOK CLIENTES</h1>
           <p>Mecánica Integral</p>
         </div>
 
         {!ingreso ? (
-          <div style={{ background: "#18181b", borderRadius: "20px", padding: "20px" }}>
+          <div
+            style={{
+              background: "#18181b",
+              borderRadius: "20px",
+              padding: "20px",
+            }}
+          >
             <p>Ingresá tu número de celular</p>
 
             <input
@@ -36,7 +57,8 @@ export default function SyczokPrototype() {
                 width: "100%",
                 padding: "12px",
                 borderRadius: "10px",
-                marginBottom: "10px"
+                marginBottom: "10px",
+                border: "none",
               }}
             />
 
@@ -48,7 +70,8 @@ export default function SyczokPrototype() {
                 borderRadius: "10px",
                 background: "red",
                 color: "white",
-                border: "none"
+                border: "none",
+                cursor: "pointer",
               }}
             >
               Ingresar
@@ -56,7 +79,14 @@ export default function SyczokPrototype() {
           </div>
         ) : (
           <>
-            <div style={{ background: "#18181b", borderRadius: "20px", padding: "20px", marginTop: "20px" }}>
+            <div
+              style={{
+                background: "#18181b",
+                borderRadius: "20px",
+                padding: "20px",
+                marginTop: "20px",
+              }}
+            >
               <h2>Vehículos asociados</h2>
 
               {VEHICULOS.map((v) => (
@@ -66,21 +96,41 @@ export default function SyczokPrototype() {
                     background: "#27272a",
                     padding: "15px",
                     borderRadius: "10px",
-                    marginBottom: "10px"
+                    marginBottom: "10px",
                   }}
                 >
-                  <div>{v.marca} · {v.patente}</div>
+                  <div>
+                    {v.marca} · {v.patente}
+                  </div>
+
                   <div>{v.kilometraje}</div>
                 </div>
               ))}
             </div>
 
-            <div style={{ background: "#18181b", borderRadius: "20px", padding: "20px", marginTop: "20px" }}>
+            <div
+              style={{
+                background: "#18181b",
+                borderRadius: "20px",
+                padding: "20px",
+                marginTop: "20px",
+              }}
+            >
               <h2>Próximo control</h2>
-              <p>{vehiculo.patente} · 105.000 km o 15/08/2026</p>
+
+              <p>
+                {vehiculo.patente} · 105.000 km o 15/08/2026
+              </p>
             </div>
 
-            <div style={{ background: "#18181b", borderRadius: "20px", padding: "20px", marginTop: "20px" }}>
+            <div
+              style={{
+                background: "#18181b",
+                borderRadius: "20px",
+                padding: "20px",
+                marginTop: "20px",
+              }}
+            >
               <h2>Historial</h2>
 
               {HISTORIAL.map((item) => (
@@ -90,7 +140,7 @@ export default function SyczokPrototype() {
                     background: "#27272a",
                     padding: "15px",
                     borderRadius: "10px",
-                    marginBottom: "10px"
+                    marginBottom: "10px",
                   }}
                 >
                   {item}
