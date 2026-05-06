@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 const VEHICULOS = [
   { marca: "Toyota", patente: "AB123CD", kilometraje: "98.500 km" },
