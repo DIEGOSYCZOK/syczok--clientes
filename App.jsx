@@ -323,5 +323,9 @@ export default function SyczokClientes() {
     }}
   >
     Vehículo en buen estado general.
+
+Vehículo en buen estado general.
   </div>
 </div>
+)
+}
