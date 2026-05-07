@@ -148,7 +148,7 @@ export default function SyczokClientes() {
     display: "block",
     margin: "0 auto 10px auto",
   }}
-              }}
+              
             />
 
             <button
