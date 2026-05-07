@@ -272,6 +272,14 @@ export default function SyczokClientes() {
     marginTop: "20px"
   }}
 >
+<div
+  style={{
+    background: "#18181b",
+    borderRadius: "20px",
+    padding: "20px",
+    marginTop: "20px"
+  }}
+>
   <h2>Aceite y Filtro</h2>
 
   <div
@@ -288,26 +296,27 @@ export default function SyczokClientes() {
   </div>
 </div>
 
-<div style={{
-  background: "#18181b",
-  borderRadius: "20px",
-  padding: "20px",
-  marginTop: "20px"
-}}>
+<div
+  style={{
+    background: "#18181b",
+    borderRadius: "20px",
+    padding: "20px",
+    marginTop: "20px"
+  }}
+>
   <h2>Observaciones</h2>
 
-  <div style={{
-    background: "#27272a",
-    padding: "15px",
-    borderRadius: "10px",
-    marginTop: "10px"
-  }}>
-    Cliente solicita revisión general del vehículo.
-  </div>
-</div>
   <div
     style={{
       background: "#27272a",
+      padding: "15px",
+      borderRadius: "10px",
+      marginTop: "10px"
+    }}
+  >
+    Cliente solicita revisión general del vehículo.
+  </div>
+</div>
       padding: "15px",
       borderRadius: "10px",
       marginTop: "10px"
