@@ -287,7 +287,6 @@ export default function SyczokClientes() {
     Próximo cambio: 25/05/2026
   </div>
 </div>
-
 <div
   style={{
     background: "#18181b",
@@ -295,6 +294,8 @@ export default function SyczokClientes() {
     padding: "20px",
     marginTop: "20px"
   }}
+>
+
 >
   <h2>Observaciones</h2>
 
