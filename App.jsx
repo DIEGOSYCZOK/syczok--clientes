@@ -154,7 +154,7 @@ export default function SyczokClientes() {
             <button
               onClick={ingresar}
               style={{
-                style={{
+                
   width: "250px",
   maxWidth: "100%",
   padding: "12px",
