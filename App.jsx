@@ -232,7 +232,50 @@ export default function SyczokClientes() {
               <h2>Próximo Control</h2>
               <p>{proximoControl}</p>
             </div>
+<div
+  style={{
+    background: "#18181b",
+    borderRadius: "20px",
+    padding: "20px",
+    marginTop: "20px"
+  }}
+>
+  <h2>Aceite y Filtro</h2>
 
+  <div
+    style={{
+      background: "#27272a",
+      padding: "15px",
+      borderRadius: "10px",
+      marginTop: "10px"
+    }}
+  >
+    <div>Último cambio: 10/02/2025</div>
+    <div>Próximo cambio: 25/05/2026</div>
+  </div>
+</div>
+
+<div
+  style={{
+    background: "#18181b",
+    borderRadius: "20px",
+    padding: "20px",
+    marginTop: "20px"
+  }}
+>
+  <h2>Observaciones</h2>
+
+  <div
+    style={{
+      background: "#27272a",
+      padding: "15px",
+      borderRadius: "10px",
+      marginTop: "10px"
+    }}
+  >
+    Vehículo en buen estado general.
+  </div>
+</div>
             <div
               style={{
                 background: "#18181b",
