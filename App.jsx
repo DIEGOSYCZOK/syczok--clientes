@@ -296,11 +296,3 @@ export default function SyczokClientes() {
   </div>
 </div>
 
-<div
-  style={{
-    background: "#18181b",
-    borderRadius: "20px",
-    padding: "20px",
-    marginTop: "20px"
-  }}
->
