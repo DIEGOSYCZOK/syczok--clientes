@@ -1,31 +1,108 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
-const VEHICULOS = [
-  { marca: "Toyota", patente: "AB123CD", kilometraje: "98.500 km" },
-  { marca: "Volkswagen", patente: "AC456EF", kilometraje: "74.200 km" },
-];
+const CLIENTES_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTWqFSzzr_VpOZJjbNJu9YCFI3y605OofLcq2GgSem_bP0RfrVERRItbGsA9p_zJkJ4vdHpDRlug7R0/pub?gid=0&single=true&output=csv";
+const VEHICULOS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTWqFSzzr_VpOZJjbNJu9YCFI3y605OofLcq2GgSem_bP0RfrVERRItbGsA9p_zJkJ4vdHpDRlug7R0/pub?gid=436954777&single=true&output=csv";
+const SERVICE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTWqFSzzr_VpOZJjbNJu9YCFI3y605OofLcq2GgSem_bP0RfrVERRItbGsA9p_zJkJ4vdHpDRlug7R0/pub?gid=2063028054&single=true&output=csv";
 
-const HISTORIAL = [
-  "10/03/2026 · Cambio de aceite y filtros · 98.500 km",
-  "15/12/2025 · Cambio de pastillas de freno · 91.200 km",
-];
+function csvToJson(csv) {
+  const lines = csv.trim().split("\n");
+  const headers = lines[0].split(",").map((h) => h.trim());
 
-export default function SyczokPrototype() {
+  return lines.slice(1).map((line) => {
+    const values = line.split(",");
+    const obj = {};
+
+    headers.forEach((header, index) => {
+      obj[header] = values[index]?.trim() || "";
+    });
+
+    return obj;
+  });
+}
+
+export default function SyczokClientes() {
   const [telefono, setTelefono] = useState("");
-  const [ingreso, setIngreso] = useState(false);
-  const vehiculo = useMemo(() => VEHICULOS[0], []);
+  const [cliente, setCliente] = useState(null);
+  const [vehiculos, setVehiculos] = useState([]);
+  const [services, setServices] = useState([]);
+  const [mensaje, setMensaje] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function ingresar() {
+    setLoading(true);
+    setMensaje("");
+
+    try {
+      const [clientesRes, vehiculosRes, servicesRes] = await Promise.all([
+        fetch(CLIENTES_URL),
+        fetch(VEHICULOS_URL),
+        fetch(SERVICE_URL),
+      ]);
+
+      const clientesCsv = await clientesRes.text();
+      const vehiculosCsv = await vehiculosRes.text();
+      const servicesCsv = await servicesRes.text();
+
+      const clientes = csvToJson(clientesCsv);
+      const vehiculosData = csvToJson(vehiculosCsv);
+      const servicesData = csvToJson(servicesCsv);
+
+      const clienteEncontrado = clientes.find(
+        (c) =>
+          c.TELEFONO?.replace(/\s/g, "") ===
+          telefono.replace(/\s/g, "")
+      );
+
+      if (!clienteEncontrado) {
+        setMensaje("Número no encontrado");
+        setCliente(null);
+        setVehiculos([]);
+        setServices([]);
+        setLoading(false);
+        return;
+      }
+
+      setCliente(clienteEncontrado);
+
+      const vehiculosCliente = vehiculosData.filter(
+        (v) =>
+          v.TELEFONO?.replace(/\s/g, "") ===
+          telefono.replace(/\s/g, "")
+      );
+
+      setVehiculos(vehiculosCliente);
+
+      const servicesCliente = servicesData.filter(
+        (s) =>
+          s.TELEFONO?.replace(/\s/g, "") ===
+          telefono.replace(/\s/g, "")
+      );
+
+      setServices(servicesCliente);
+    } catch (error) {
+      setMensaje("Error cargando datos");
+    }
+
+    setLoading(false);
+  }
+
+  const proximoControl = useMemo(() => {
+    if (!cliente) return "";
+
+    return cliente["PROXIMO CONTROL"] || "Sin información";
+  }, [cliente]);
 
   return (
     <div
       style={{
-        background: "black",
+        background: "#000",
         minHeight: "100vh",
         color: "white",
         padding: "20px",
         fontFamily: "Arial",
       }}
     >
-      <div style={{ maxWidth: "400px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "450px", margin: "0 auto" }}>
         <div
           style={{
             background: "#18181b",
@@ -39,7 +116,7 @@ export default function SyczokPrototype() {
           <p>Mecánica Integral</p>
         </div>
 
-        {!ingreso ? (
+        {!cliente ? (
           <div
             style={{
               background: "#18181b",
@@ -63,7 +140,7 @@ export default function SyczokPrototype() {
             />
 
             <button
-              onClick={() => setIngreso(true)}
+              onClick={ingresar}
               style={{
                 width: "100%",
                 padding: "12px",
@@ -74,8 +151,14 @@ export default function SyczokPrototype() {
                 cursor: "pointer",
               }}
             >
-              Ingresar
+              {loading ? "Cargando..." : "Ingresar"}
             </button>
+
+            {mensaje && (
+              <p style={{ marginTop: "15px", color: "#f87171" }}>
+                {mensaje}
+              </p>
+            )}
           </div>
         ) : (
           <>
@@ -84,26 +167,39 @@ export default function SyczokPrototype() {
                 background: "#18181b",
                 borderRadius: "20px",
                 padding: "20px",
-                marginTop: "20px",
+                marginBottom: "20px",
               }}
             >
-              <h2>Vehículos asociados</h2>
+              <h2>{cliente.CLIENTE}</h2>
+              <p>{cliente.OBSERVACIONES}</p>
+            </div>
 
-              {VEHICULOS.map((v) => (
+            <div
+              style={{
+                background: "#18181b",
+                borderRadius: "20px",
+                padding: "20px",
+                marginBottom: "20px",
+              }}
+            >
+              <h2>Vehículos</h2>
+
+              {vehiculos.map((v, index) => (
                 <div
-                  key={v.patente}
+                  key={index}
                   style={{
                     background: "#27272a",
                     padding: "15px",
                     borderRadius: "10px",
-                    marginBottom: "10px",
+                    marginTop: "10px",
                   }}
                 >
                   <div>
-                    {v.marca} · {v.patente}
+                    <strong>{v.MARCA}</strong>
                   </div>
 
-                  <div>{v.kilometraje}</div>
+                  <div>Patente: {v.PATENTE}</div>
+                  <div>Año: {v.AÑO}</div>
                 </div>
               ))}
             </div>
@@ -113,14 +209,11 @@ export default function SyczokPrototype() {
                 background: "#18181b",
                 borderRadius: "20px",
                 padding: "20px",
-                marginTop: "20px",
+                marginBottom: "20px",
               }}
             >
-              <h2>Próximo control</h2>
-
-              <p>
-                {vehiculo.patente} · 105.000 km o 15/08/2026
-              </p>
+              <h2>Próximo Control</h2>
+              <p>{proximoControl}</p>
             </div>
 
             <div
@@ -128,22 +221,23 @@ export default function SyczokPrototype() {
                 background: "#18181b",
                 borderRadius: "20px",
                 padding: "20px",
-                marginTop: "20px",
               }}
             >
               <h2>Historial</h2>
 
-              {HISTORIAL.map((item) => (
+              {services.map((s, index) => (
                 <div
-                  key={item}
+                  key={index}
                   style={{
                     background: "#27272a",
                     padding: "15px",
                     borderRadius: "10px",
-                    marginBottom: "10px",
+                    marginTop: "10px",
                   }}
                 >
-                  {item}
+                  <div>KMS: {s.KMS}</div>
+                  <div>Aceite: {s.ACEITE}</div>
+                  <div>Filtro: {s.FILTRO}</div>
                 </div>
               ))}
             </div>
