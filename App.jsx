@@ -139,15 +139,15 @@ export default function SyczokClientes() {
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
               placeholder="Número de celular"
-              style={{
-               width: "250px",
-maxWidth: "100%",
-                padding: "12px",
-                borderRadius: "10px",
-                marginBottom: "10px",
-                display: "block",
-margin: "0 auto 10px auto",
-                border: "none",
+ style={{
+  width: "250px",
+  maxWidth: "100%",
+  padding: "12px",
+  borderRadius: "10px",
+  marginBottom: "10px",
+  display: "block",
+  margin: "0 auto 10px auto",
+}}
               }}
             />
 
