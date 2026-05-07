@@ -304,28 +304,3 @@ export default function SyczokClientes() {
     marginTop: "20px"
   }}
 >
-  <h2>Observaciones</h2>
-
-  <div
-    style={{
-      background: "#27272a",
-      padding: "15px",
-      borderRadius: "10px",
-      marginTop: "10px"
-    }}
-  >
-    Cliente solicita revisión general del vehículo.
-  </div>
-</div>
-      padding: "15px",
-      borderRadius: "10px",
-      marginTop: "10px"
-    }}
-  >
-    Vehículo en buen estado general.
-
-Vehículo en buen estado general.
-  </div>
-</div>
-)
-}
