@@ -295,8 +295,6 @@ export default function SyczokClientes() {
     marginTop: "20px"
   }}
 >
-
->
   <h2>Observaciones</h2>
 
   <div
