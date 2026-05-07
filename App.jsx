@@ -133,7 +133,9 @@ export default function SyczokClientes() {
               padding: "20px",
             }}
           >
-            <p>Ingresá tu número de celular</p>
+            <p style={{ textAlign: "center" }}>
+  Ingresá tu número de celular
+</p>
 
            <input
   value={telefono}
