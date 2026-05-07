@@ -272,3 +272,4 @@ export default function SyczokClientes() {
     marginTop: "20px"
   }}
 >
+</div>
