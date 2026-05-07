@@ -152,21 +152,23 @@ export default function SyczokClientes() {
             />
 
             <button
-              onClick={ingresar}
-              style={{
-                
-  width: "250px",
-  maxWidth: "100%",
-  padding: "12px",
-  borderRadius: "10px",
-  marginBottom: "10px",
-  display: "block",
-  margin: "0 auto 10px auto",
- }}
-            >
-              {loading ? "Cargando..." : "Ingresar"}
-            </button>
-
+  onClick={ingresar}
+  style={{
+    width: "250px",
+    maxWidth: "100%",
+    padding: "12px",
+    borderRadius: "10px",
+    background: "red",
+    color: "white",
+    border: "none",
+    display: "block",
+    margin: "0 auto",
+    fontWeight: "bold",
+    cursor: "pointer"
+  }}
+>
+  {loading ? "Cargando..." : "Ingresar ↵"}
+</button>
             {mensaje && (
               <p style={{ marginTop: "15px", color: "#f87171" }}>
                 {mensaje}
