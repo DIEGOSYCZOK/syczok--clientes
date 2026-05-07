@@ -287,15 +287,13 @@ export default function SyczokClientes() {
     Próximo cambio: 25/05/2026
   </div>
 </div>
-<div
-  style={{
-    background: "#18181b",
-    borderRadius: "20px",
-    padding: "20px",
-    marginTop: "20px"
-  }}
+ <div style={{
+  background: "#18181b",
+  borderRadius: "20px",
+  padding: "20px",
+  marginTop: "20px"
+}}>
   <h2>Observaciones</h2>
-
   <div
     style={{
       background: "#27272a",
